@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaApi", "CinemaApi\CinemaApi.csproj", "{470652F0-6A73-466A-ACC4-0DD161F5FB26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaCore", "CinemaCore\CinemaCore.csproj", "{94C84792-E783-4B8A-BB6A-0A29D39EECEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaInfrastructure", "CinemaInfrastructure\CinemaInfrastructure.csproj", "{A4E65287-073E-429B-BF31-FEEC257C9027}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{470652F0-6A73-466A-ACC4-0DD161F5FB26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{470652F0-6A73-466A-ACC4-0DD161F5FB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{470652F0-6A73-466A-ACC4-0DD161F5FB26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{470652F0-6A73-466A-ACC4-0DD161F5FB26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94C84792-E783-4B8A-BB6A-0A29D39EECEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94C84792-E783-4B8A-BB6A-0A29D39EECEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94C84792-E783-4B8A-BB6A-0A29D39EECEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94C84792-E783-4B8A-BB6A-0A29D39EECEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4E65287-073E-429B-BF31-FEEC257C9027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4E65287-073E-429B-BF31-FEEC257C9027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4E65287-073E-429B-BF31-FEEC257C9027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4E65287-073E-429B-BF31-FEEC257C9027}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {328F9072-2056-407A-8556-81FBC0BEFC88}
+	EndGlobalSection
+EndGlobal
