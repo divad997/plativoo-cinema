@@ -57,49 +57,49 @@ namespace CinemaInfrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("df042bb3-70bd-4467-a53f-21e200a75ef8"),
+                            Id = new Guid("5b2a83c9-7db4-4d17-8577-8907ef9ea15d"),
                             DateOfBirth = new DateTime(1965, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Robert",
                             LastName = "Downey Jr"
                         },
                         new
                         {
-                            Id = new Guid("1d742364-c856-4e31-a0c0-4ae18b631770"),
+                            Id = new Guid("96850b21-633c-4cd7-aff9-02de5a8b305a"),
                             DateOfBirth = new DateTime(1981, 6, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Chris",
                             LastName = "Evans"
                         },
                         new
                         {
-                            Id = new Guid("c1b48aac-263b-4764-ae0d-dd9d51297639"),
+                            Id = new Guid("b7d25307-e1a2-4f38-9614-723b40067087"),
                             DateOfBirth = new DateTime(1967, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Mark",
                             LastName = "Ruffalo"
                         },
                         new
                         {
-                            Id = new Guid("233bfa34-2741-4663-a561-9810f95c2ee8"),
+                            Id = new Guid("c15547bd-8996-4767-b0db-d5c8f24eea36"),
                             DateOfBirth = new DateTime(1972, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Gwyneth",
                             LastName = "Paltrow"
                         },
                         new
                         {
-                            Id = new Guid("e4de4f51-7e56-4d12-a73e-df884a895f5f"),
+                            Id = new Guid("ea261dd1-223c-4823-8418-25fe6fd51c42"),
                             DateOfBirth = new DateTime(1963, 6, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Johnny",
                             LastName = "Depp"
                         },
                         new
                         {
-                            Id = new Guid("a18a46fe-6e6a-4382-9eef-09ac77d8c5cc"),
+                            Id = new Guid("65927bde-a9f3-42b9-b9ae-208448c31f76"),
                             DateOfBirth = new DateTime(1967, 2, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Benicio",
                             LastName = "Del Toro"
                         },
                         new
                         {
-                            Id = new Guid("256153e2-e144-4143-bb07-bc140ff83123"),
+                            Id = new Guid("74d8f9f1-9ae2-464d-90ce-ad806d54f7c3"),
                             DateOfBirth = new DateTime(1975, 6, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Tobey",
                             LastName = "Maguire"
@@ -129,21 +129,21 @@ namespace CinemaInfrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f519ae16-badf-4523-9995-8326a8df3585"),
+                            Id = new Guid("07b9e9b1-5b85-4abe-8e6c-3af9b6858224"),
                             DateOfBirth = new DateTime(1964, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Joss",
                             LastName = "Whedon"
                         },
                         new
                         {
-                            Id = new Guid("b79681d3-e38b-40cc-a654-912e921bcf12"),
+                            Id = new Guid("a980f781-9c70-4b10-bc5b-b11acdc27fae"),
                             DateOfBirth = new DateTime(1966, 10, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Jon",
                             LastName = "Favreu"
                         },
                         new
                         {
-                            Id = new Guid("1486270e-3059-4e8d-ba0b-5607080f29d1"),
+                            Id = new Guid("91b57acf-ea13-4773-9f33-ae9f4d84daf0"),
                             DateOfBirth = new DateTime(1940, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Terry",
                             LastName = "Gilliam"
@@ -167,27 +167,27 @@ namespace CinemaInfrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("348e8ec3-a092-4a64-a497-6de690349cf3"),
+                            Id = new Guid("f2f66613-9378-4e5e-bca8-c8786f0154e6"),
                             Name = "Horror"
                         },
                         new
                         {
-                            Id = new Guid("e1a7cf8b-2945-4578-8977-4337d85ebe48"),
+                            Id = new Guid("db6a2124-1e44-40a9-bcce-be91c6400fff"),
                             Name = "Action"
                         },
                         new
                         {
-                            Id = new Guid("42f12480-a374-471b-9e56-5e83c425a692"),
+                            Id = new Guid("8e2d23d7-9eae-4195-a3a5-dccac6d05514"),
                             Name = "Comedy"
                         },
                         new
                         {
-                            Id = new Guid("861e42b0-f6ce-4185-80c5-69f1b46283c0"),
+                            Id = new Guid("75082de0-918b-493a-a071-f590177f8ed5"),
                             Name = "Thriller"
                         },
                         new
                         {
-                            Id = new Guid("16460579-6c68-4da9-9d96-de60571fbc27"),
+                            Id = new Guid("4edb5883-8e24-47ca-a4ce-19fccb3dcf80"),
                             Name = "Drama"
                         });
                 });

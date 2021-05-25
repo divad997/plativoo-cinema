@@ -1,25 +1,24 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Genre } from '../models/genre';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
+import { Genre } from "../models/genre";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class GenreService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   createGenre(genre: Genre) {
-    return this.http.post(environment.apiUrl + '/genres/', genre);
+    return this.http.post(environment.apiUrl + "/genres/", genre);
   }
 
   getAllGenres() {
-    return this.http.get<Array<Genre>>(environment.apiUrl + '/genres/');
+    return this.http.get<Array<Genre>>(environment.apiUrl + "/genres/");
   }
 
   getGenreById(id: string) {
-    return this.http.get<Genre>(environment.apiUrl + '/genres/' + id);
+    return this.http.get<Genre>(environment.apiUrl + "/genres/" + id);
   }
 
   editGenre(genre: Genre) {
@@ -27,6 +26,6 @@ export class GenreService {
   }
 
   deleteGenre(id: string) {
-    return this.http.delete(environment.apiUrl + '/genres/' + id);
+    return this.http.delete(environment.apiUrl + "/genres/" + id);
   }
 }

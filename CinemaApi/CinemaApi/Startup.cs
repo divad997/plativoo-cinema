@@ -54,7 +54,7 @@ namespace CinemaApi
                 options
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
-                .AllowAnyMethod());
+                .AllowAnyHeader());
 
             app.UseHttpsRedirection();
 

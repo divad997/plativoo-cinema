@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Edit Movie</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="newMovie.name" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [(ngModel)]="newMovie.releaseDate"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Director</mat-label>
+    <mat-select [(ngModel)]="editedDirector">
+        <mat-option *ngFor="let director of directors" [value]="director.firstName + director.lastName">
+            {{director.firstName + director.lastName}}
+        </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Genre</mat-label>
+    <mat-select [(ngModel)]="editedGenre">
+        <mat-option *ngFor="let genre of genres" [value]="genre.name">
+            {{genre.name}}
+        </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Actors</mat-label>
+    <mat-select [(ngModel)]="editedActors" multiple>
+        <mat-option *ngFor="let actor of actors" [value]="actor.firstName + actor.lastName">
+            {{actor.firstName + actor.lastName}}
+        </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

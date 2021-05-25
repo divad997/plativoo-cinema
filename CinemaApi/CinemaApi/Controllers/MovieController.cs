@@ -56,14 +56,14 @@ namespace movieApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var list = await _movieService.GetMovieByIdAsync(id);
+            var movie = await _movieService.GetMovieByIdAsync(id);
 
-            if (list == null)
+            if (movie == null)
             {
                 return NotFound();
             }
 
-            return Ok(list);
+            return Ok(movie);
         }
 
         [HttpPut]

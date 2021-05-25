@@ -43,12 +43,15 @@ namespace CinemaApi.Services
         {
             var movies = await _context.Movies
                 .Include(m => m.Actors)
-                .Include(m => m.Director)
-                .Include(m => m.Genre)
+                //.Include(m => m.Director)
+                //.Include(m => m.Genre)
                 .ToListAsync();
 
-
-            
+            foreach (Movie mov in movies)
+            {
+                mov.Genre = await _context.Genres.FirstOrDefaultAsync(g => g.Id == mov.GenreId);
+                mov.Director = await _context.Directors.FirstOrDefaultAsync(d => d.Id == mov.DirectorId);
+            }
 
             if (movies == null)
                 throw new Exception("Couldn't retrieve the movies!");
@@ -60,9 +63,12 @@ namespace CinemaApi.Services
         {
             var movie = await _context.Movies
                 .Include(m => m.Actors)
-                .Include(m => m.Director)
-                .Include(m => m.Genre)
+                //.Include(m => m.Director)
+               // .Include(m => m.Genre)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            movie.Genre = await _context.Genres.FirstOrDefaultAsync(g => g.Id == movie.GenreId);
+            movie.Director = await _context.Directors.FirstOrDefaultAsync(d => d.Id == movie.DirectorId);
 
             if (movie == null)
                 throw new Exception("Couldn't retrieve the movie!");
@@ -72,7 +78,7 @@ namespace CinemaApi.Services
    
         public async Task<bool> EditMovieAsync(Movie movie)
         {
-            var editedMovie = await _context.Movies.FindAsync(movie.Id);
+            var editedMovie = await _context.Movies.FirstOrDefaultAsync(m => m.Id == movie.Id);
 
             editedMovie.Update(movie);
 
@@ -82,7 +88,7 @@ namespace CinemaApi.Services
 
         public async Task<bool> DeleteMovieAsync(Guid movieId)
         {
-            var movie  = await _context.Movies.FindAsync(movieId);
+            var movie  = await _context.Movies.FirstOrDefaultAsync(m => m.Id == movieId);
 
             if (movie == null)
                 throw new Exception("List with given id doesn't exist!");

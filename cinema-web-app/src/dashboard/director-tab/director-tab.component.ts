@@ -1,10 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Director } from 'src/app/models/director';
-import { DirectorService } from 'src/app/services/director.service';
-import { EditDirectorDialogComponent } from '../dialogs/edit/edit-director-dialog/edit-director-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { switchMap, tap, filter } from 'rxjs/operators';
+import { Component, OnInit } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
+import { Director } from "src/app/models/director";
+import { DirectorService } from "src/app/services/director.service";
+import { EditDirectorDialogComponent } from "../dialogs/edit/edit-director-dialog/edit-director-dialog.component";
+import { MatDialog } from "@angular/material/dialog";
+import { switchMap, tap, filter } from "rxjs/operators";
+import { AddDirectorDialogComponent } from "../dialogs/add/add-director-dialog/add-director-dialog.component";
 
 @Component({
   selector: "app-director-tab",
@@ -52,10 +53,7 @@ export class DirectorTabComponent implements OnInit {
         this.toastrService.success("Successful retrieval of directors!");
         console.log(res);
         this.allDirectors = res;
-        this.formattedDirectors = this.allDirectors.map((d) => ({
-          ...d,
-          movies: d.movies.map((m) => m.name).join(","),
-        }));
+        this.formattedDirectors = this.allDirectors.map(this.formatDirector);
       },
       (err) => {
         this.toastrService.error(err);
@@ -105,10 +103,41 @@ export class DirectorTabComponent implements OnInit {
       .subscribe(
         () => {
           this.toastrService.success("Successful edit of director!");
+          this.formattedDirectors = this.formattedDirectors.map((d) =>
+            d.id === this.director.id ? this.formatDirector(this.director) : d
+          );
+
         },
         (err) => {
           this.toastrService.error(err);
         }
       );
+  }
+
+  startAdd() {
+    this.dialog
+      .open(AddDirectorDialogComponent, {
+        data: this.director,
+      })
+      .afterClosed()
+      .pipe(
+        filter(response => response !== undefined),
+        switchMap((newData) => this.directorService.createDirector(newData)))
+      .subscribe(
+        (res: Director) => {
+          this.toastrService.success("Successful create of actor!");
+          this.formattedDirectors.push(this.formatDirector(res));
+        },
+        (err) => {
+          this.toastrService.error(err);
+        }
+      );
+  }
+
+  formatDirector(director: Director) {
+    return {
+      ...director,
+      movies: director.movies.map((m) => m.name).join(","),
+    };
   }
 }

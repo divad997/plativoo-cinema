@@ -8,6 +8,12 @@ namespace CinemaInfrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Movie> builder)
         {
+            builder.HasOne(m => m.Genre)
+                .WithMany(g => g.Movies)
+                .HasForeignKey(m => m.GenreId);
+            builder.HasOne(m => m.Director)
+                .WithMany(d => d.Movies)
+                .HasForeignKey(m => m.DirectorId);
             builder.HasKey(m => m.Id);
             builder.Property(m => m.Id)
                 .HasDefaultValueSql("NEWID()");          

@@ -39,7 +39,9 @@ namespace CinemaCore.Models
         {
             Name = movie.Name;
             ReleaseDate = movie.ReleaseDate;
+            Genre = movie.Genre;
             GenreId = movie.GenreId;
+            Director = movie.Director;
             DirectorId = movie.DirectorId;
             Actors = movie.Actors;
         }

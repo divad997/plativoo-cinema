@@ -9,9 +9,6 @@ namespace CinemaInfrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Director> builder)
         {
-            builder.HasMany(d => d.Movies)
-                .WithOne(m => m.Director)
-                .HasForeignKey(m => m.DirectorId);
             builder.HasKey(d => d.Id);
             builder.Property(d => d.Id)
                 .HasDefaultValueSql("NEWID()");
