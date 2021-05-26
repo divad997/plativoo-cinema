@@ -1,1 +1,9 @@
-<p>add-genre-dialog works!</p>
+<h1 mat-dialog-title>Add Genre</h1>
+<form mat-dialog-content #ngForm='ngForm'>
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput name="name" [(ngModel)]="newGenre.name" required/>
+  </mat-form-field>
+  <button mat-raised-button mat-dialog-close [disabled]='ngForm.invalid'>Add</button>
+</form>
+

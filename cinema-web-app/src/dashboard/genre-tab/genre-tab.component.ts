@@ -17,7 +17,7 @@ export class GenreTabComponent implements OnInit {
   allGenres: Array<Genre>;
   displayedColumns: string[] = ["name", "movies", "actions"];
   formattedGenres: { movies: string; id: string; name: string }[];
-  genre: Genre;
+  genre: Genre = new Genre;
 
   constructor(
     private genreService: GenreService,
@@ -102,14 +102,13 @@ export class GenreTabComponent implements OnInit {
         data: this.genre,
       })
       .afterClosed()
-      .pipe(
-        filter((response) => response !== undefined),
-        switchMap((newData) => this.genreService.createGenre(newData))
-      )
+      .pipe(switchMap(() => this.genreService.createGenre(this.genre)))
       .subscribe(
         (res: Genre) => {
           this.toastrService.success("Successful create of genre!");
-          this.formattedGenres.push(this.formatGenre(res));
+          this.formattedGenres = this.formattedGenres.concat(
+            this.formatGenre(res)
+          );
         },
         (err) => {
           this.toastrService.error(err);

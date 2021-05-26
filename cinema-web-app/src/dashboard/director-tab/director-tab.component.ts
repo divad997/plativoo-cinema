@@ -13,7 +13,7 @@ import { AddDirectorDialogComponent } from "../dialogs/add/add-director-dialog/a
   styleUrls: ["./director-tab.component.css"],
 })
 export class DirectorTabComponent implements OnInit {
-  director: Director;
+  director: Director = new Director;
   allDirectors: Array<Director>;
   formattedDirector: {
     movies: string;
@@ -120,13 +120,13 @@ export class DirectorTabComponent implements OnInit {
         data: this.director,
       })
       .afterClosed()
-      .pipe(
-        filter(response => response !== undefined),
-        switchMap((newData) => this.directorService.createDirector(newData)))
+      .pipe(switchMap(() => this.directorService.createDirector(this.director)))
       .subscribe(
         (res: Director) => {
-          this.toastrService.success("Successful create of actor!");
-          this.formattedDirectors.push(this.formatDirector(res));
+          this.toastrService.success("Successful create of director!");
+          this.formattedDirectors = this.formattedDirectors.concat(
+            this.formatDirector(res)
+          );
         },
         (err) => {
           this.toastrService.error(err);

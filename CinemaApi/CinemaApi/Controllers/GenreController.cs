@@ -56,14 +56,14 @@ namespace CinemaApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var list = await _genreService.GetGenreByIdAsync(id);
+            var genre = await _genreService.GetGenreByIdAsync(id);
 
-            if (list == null)
+            if (genre == null)
             {
                 return NotFound();
             }
 
-            return Ok(list);
+            return Ok(genre);
         }
 
         [HttpPut]

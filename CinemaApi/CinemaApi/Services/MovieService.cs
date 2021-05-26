@@ -78,7 +78,11 @@ namespace CinemaApi.Services
    
         public async Task<bool> EditMovieAsync(Movie movie)
         {
-            var editedMovie = await _context.Movies.FirstOrDefaultAsync(m => m.Id == movie.Id);
+            var editedMovie = await _context.Movies
+                .Include(m => m.Actors)
+                .Include(m => m.Director)
+                .Include(m => m.Genre)
+                .FirstOrDefaultAsync(m => m.Id == movie.Id);
 
             editedMovie.Update(movie);
 

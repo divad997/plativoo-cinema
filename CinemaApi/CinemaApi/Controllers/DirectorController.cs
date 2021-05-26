@@ -56,14 +56,14 @@ namespace CinemaApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var list = await _directorService.GetDirectorByIdAsync(id);
+            var director = await _directorService.GetDirectorByIdAsync(id);
 
-            if (list == null)
+            if (director == null)
             {
                 return NotFound();
             }
 
-            return Ok(list);
+            return Ok(director);
         }
 
         [HttpPut]
