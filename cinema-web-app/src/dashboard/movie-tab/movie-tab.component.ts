@@ -7,10 +7,12 @@ import { Actor } from "src/app/models/actor";
 import { Director } from "src/app/models/director";
 import { Genre } from "src/app/models/genre";
 import { Movie } from "src/app/models/movie";
+import { MovieDto } from "src/app/models/movie-dto";
 import { ActorService } from "src/app/services/actor.service";
 import { DirectorService } from "src/app/services/director.service";
 import { GenreService } from "src/app/services/genre.service";
 import { MovieService } from "src/app/services/movie.service";
+import { AddMovieDialogComponent } from "../dialogs/add/add-movie-dialog/add-movie-dialog.component";
 import { EditMovieDialogComponent } from "../dialogs/edit/edit-movie-dialog/edit-movie-dialog.component";
 
 @Component({
@@ -31,6 +33,8 @@ export class MovieTabComponent implements OnInit {
     "actors",
     "actions",
   ];
+  editedMovie: Movie;
+  movie: Movie = new Movie();
   formattedMovies: {
     actors: string;
     director: string;
@@ -41,11 +45,6 @@ export class MovieTabComponent implements OnInit {
     genre: Genre;
     directorId: string;
   }[];
-  editedMovie: Movie;
-  editedActors: Array<Actor>;
-  editedDirector: Director;
-  editedGenre: Genre;
-  movie: Movie;
 
   constructor(
     private movieService: MovieService,
@@ -66,7 +65,7 @@ export class MovieTabComponent implements OnInit {
       (res: any) => {
         this.toastrService.success(res, "Successful retrieval of movies!");
         this.allMovies = res as Array<Movie>;
-        this.formattedMovies = this.allMovies.map(this.formatMovie)
+        this.formattedMovies = this.allMovies.map(this.formatMovie);
       },
       (err) => {
         this.toastrService.error(err);
@@ -110,9 +109,6 @@ export class MovieTabComponent implements OnInit {
         tap(
           (res: any) => {
             this.editedMovie = res as Movie;
-            this.editedDirector = this.editedMovie.director;
-            this.editedGenre = this.editedMovie.genre;
-            this.editedActors = this.editedMovie.actors;
             this.toastrService.success(
               res.id,
               "Successful retrieval of movie!"
@@ -124,27 +120,50 @@ export class MovieTabComponent implements OnInit {
         ),
         switchMap(() => {
           const dialogRef = this.dialog.open(EditMovieDialogComponent, {
-            data: { 
-              editedMovie : this.editedMovie,
+            data: {
+              editedMovie: this.editedMovie,
               actors: this.allActors,
               directors: this.allDirectors,
-              genres: this.allGenres,
-              editedActors: this.editedActors,
-              editedDirector: this.editedDirector,
-              editedGenre: this.editedGenre
-             }, 
+              genres: this.allGenres
+            },
           });
           return dialogRef.afterClosed();
         }),
         //filter((result) => result === 1),
-        switchMap(() => this.movieService.editMovie(this.editedMovie))
+        switchMap(() => this.movieService.editMovie(this.movieService.mapDto(this.editedMovie)))
       )
       .subscribe(
         () => {
           this.toastrService.success("Successful edit of movie!");
           this.formattedMovies = this.formattedMovies.map((d) =>
-            d.id === this.movie.id ? this.formatMovie(this.movie) : d
+            d.id === this.editedMovie.id ? this.formatMovie(this.editedMovie) : d
           );
+        },
+        (err) => {
+          this.toastrService.error(err);
+        }
+      );
+  }
+
+  startAdd() {
+    this.dialog
+      .open(AddMovieDialogComponent, {
+        data: {
+          movie: this.movie,
+          actors: this.allActors,
+          directors: this.allDirectors,
+          genres: this.allGenres
+        }
+      })
+      .afterClosed()
+      .pipe(switchMap(() => this.movieService.createMovie(this.movieService.mapDto(this.movie))))
+      .subscribe(
+        (res: Movie) => {
+          this.toastrService.success("Successful create of Movie!");
+          this.formattedMovies = this.formattedMovies.concat(
+            this.formatMovie(res)
+          );
+          this.movie = new Movie();
         },
         (err) => {
           this.toastrService.error(err);
@@ -155,10 +174,10 @@ export class MovieTabComponent implements OnInit {
   formatMovie(movie: Movie) {
     return {
       ...movie,
-          actors: movie.actors
-            .map((a) => a.firstName + " " + a.lastName)
-            .join(", "),
-          director: movie.director.firstName + " " + movie.director.lastName,
+      actors: movie.actors
+        .map((a) => a.firstName + " " + a.lastName)
+        .join(", "),
+      director: movie.director.firstName + " " + movie.director.lastName,
     };
   }
 }

@@ -21,6 +21,12 @@ namespace CinemaCore.Models
         public Actor()
         {
         }
+
+        public Actor(Guid actorId)
+        {
+            this.Id = actorId;
+        }
+
         public void Update(Actor actor)
         {
             FirstName = actor.FirstName;

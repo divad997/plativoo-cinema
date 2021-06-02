@@ -7,20 +7,21 @@ import { Movie } from 'src/app/models/movie';
 import { EditMovieDialogComponent } from '../../edit/edit-movie-dialog/edit-movie-dialog.component';
 
 @Component({
-  selector: 'app-add-movie-dialog',
-  templateUrl: './add-movie-dialog.component.html',
-  styleUrls: ['./add-movie-dialog.component.css']
+  selector: "app-add-movie-dialog",
+  templateUrl: "./add-movie-dialog.component.html",
+  styleUrls: ["./add-movie-dialog.component.css"],
 })
 export class AddMovieDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<EditMovieDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) 
-      public newMovie: Movie, 
-      public actors: Array<Actor>, 
-      public directors: Array<Director>,
-      public genres: Array<Genre>,
-      public editedActors: Array<Actor>,
-      public editedDirector: Director,
-      public editedGenre: Genre
-  ) { }
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      movie: Movie;
+      actors: Array<Actor>;
+      directors: Array<Director>;
+      genres: Array<Genre>;
+    }
+  ) {
+    dialogRef.disableClose = true;
+  }
 }

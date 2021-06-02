@@ -1,4 +1,6 @@
-﻿using CinemaApi.Interfaces;
+﻿using AutoMapper;
+using CinemaApi.Dtos;
+using CinemaApi.Interfaces;
 using CinemaCore.Models;
 using CinemaInfrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -11,28 +13,33 @@ namespace CinemaApi.Services
     public class MovieService : IMovieService
     {
         private readonly CinemaDbContext _context;
+        private readonly IMapper _mapper;
 
-        public MovieService(CinemaDbContext context)
+        public MovieService(CinemaDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<Movie> CreateMovieAsync(Movie movie)
+        public async Task<Movie> CreateMovieAsync(MovieDto movieDto)
         {
             if (_context.Movies == null)
                 throw new Exception("Couldn't retrieve the movies!");
             else
             {
-                var newMovie = new Movie(movie);
-                _context.Add(movie);
+                var newMovie = new Movie();
+                _mapper.Map(movieDto, newMovie);
 
-                foreach (Actor a in movie.Actors)
+                foreach (Guid id in movieDto.ActorIds)
                 {
-                    _context.Actors.Attach(a);
+                    newMovie.Actors.Add(await _context.Actors.FirstOrDefaultAsync(a => a.Id == id));
                 }
-                _context.Directors.Attach(movie.Director);
-                _context.Genres.Attach(movie.Genre);
-                
+
+                newMovie.Director = await _context.Directors.FirstOrDefaultAsync(d => d.Id == movieDto.DirectorId);
+                newMovie.Genre = await _context.Genres.FirstOrDefaultAsync(g => g.Id == movieDto.GenreId);
+
+                await _context.Movies.AddAsync(newMovie);
+
                 await _context.SaveChangesAsync();
 
                 return newMovie;
@@ -76,15 +83,25 @@ namespace CinemaApi.Services
                 return movie;
         }
    
-        public async Task<bool> EditMovieAsync(Movie movie)
+        public async Task<bool> EditMovieAsync(MovieDto movieDto)
         {
             var editedMovie = await _context.Movies
                 .Include(m => m.Actors)
                 .Include(m => m.Director)
                 .Include(m => m.Genre)
-                .FirstOrDefaultAsync(m => m.Id == movie.Id);
+                .FirstOrDefaultAsync(m => m.Id == movieDto.Id);
 
-            editedMovie.Update(movie);
+            editedMovie.Actors = new List<Actor>();
+            foreach (Guid id in movieDto.ActorIds)
+            {
+                editedMovie.Actors.Add(await _context.Actors.FirstOrDefaultAsync(a => a.Id == id));
+            }
+
+            editedMovie.Director = await _context.Directors.FirstOrDefaultAsync(d => d.Id == movieDto.DirectorId);
+            editedMovie.Genre = await _context.Genres.FirstOrDefaultAsync(g => g.Id == movieDto.GenreId);
+
+            editedMovie.Name = movieDto.Name;
+            editedMovie.ReleaseDate = movieDto.ReleaseDate;
 
             await _context.SaveChangesAsync();
             return true;

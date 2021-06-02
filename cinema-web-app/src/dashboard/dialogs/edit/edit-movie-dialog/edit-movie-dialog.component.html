@@ -16,16 +16,16 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Director</mat-label>
-    <mat-select [(ngModel)]="data.editedMovie.director">
-        <mat-option *ngFor="let director of data.directors" [value]="data.editedDirector">
+    <mat-select [compareWith]="compareDirectors" [(ngModel)]="data.editedMovie.director">
+        <mat-option *ngFor="let director of data.directors" [value]="director">
             {{director.firstName + ' ' + director.lastName}}
         </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Genre</mat-label>
-    <mat-select [(ngModel)]="data.editedMovie.genre">
-        <mat-option *ngFor="let genre of data.genres" [value]="data.editedGenre">
+    <mat-select [compareWith]="compareGenres" [(ngModel)]="data.editedMovie.genre">
+        <mat-option *ngFor="let genre of data.genres" [value]="genre">
             {{genre.name}}
         </mat-option>
     </mat-select>

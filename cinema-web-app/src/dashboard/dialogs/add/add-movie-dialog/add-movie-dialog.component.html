@@ -1,41 +1,44 @@
-<h1 mat-dialog-title>Edit Movie</h1>
-<div mat-dialog-content>
+<h1 mat-dialog-title>Add Movie</h1>
+<form mat-dialog-content #ngForm='ngForm'>
   <mat-form-field appearance="fill">
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="newMovie.name" />
+    <input matInput [(ngModel)]="data.movie.name" name="name" required/>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Choose a date</mat-label>
     <input
+      name="releaseDate"
       matInput
       [matDatepicker]="picker"
-      [(ngModel)]="newMovie.releaseDate"
+      [(ngModel)]="data.movie.releaseDate"
+      required
     />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Director</mat-label>
-    <mat-select [(ngModel)]="editedDirector">
-        <mat-option *ngFor="let director of directors" [value]="director.firstName + director.lastName">
-            {{director.firstName + director.lastName}}
+    <mat-select [(ngModel)]="data.movie.director" name="director" required>
+        <mat-option *ngFor="let director of data.directors" [value]="director">
+            {{director.firstName + ' ' + director.lastName}}
         </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Genre</mat-label>
-    <mat-select [(ngModel)]="editedGenre">
-        <mat-option *ngFor="let genre of genres" [value]="genre.name">
+    <mat-select [(ngModel)]="data.movie.genre" name="genre" required>
+        <mat-option *ngFor="let genre of data.genres" [value]="genre">
             {{genre.name}}
         </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Actors</mat-label>
-    <mat-select [(ngModel)]="editedActors" multiple>
-        <mat-option *ngFor="let actor of actors" [value]="actor.firstName + actor.lastName">
-            {{actor.firstName + actor.lastName}}
+    <mat-select [(ngModel)]="data.movie.actors" name="actors" multiple required>
+        <mat-option *ngFor="let actor of data.actors" [value]="actor">
+            {{actor.firstName + ' ' + actor.lastName}}
         </mat-option>
     </mat-select>
   </mat-form-field>
-</div>
+  <button mat-raised-button mat-dialog-close [disabled]='ngForm.invalid'>Add</button>
+</form>

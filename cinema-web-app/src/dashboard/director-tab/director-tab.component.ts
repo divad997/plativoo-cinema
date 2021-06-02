@@ -127,6 +127,7 @@ export class DirectorTabComponent implements OnInit {
           this.formattedDirectors = this.formattedDirectors.concat(
             this.formatDirector(res)
           );
+          this.director = new Director();
         },
         (err) => {
           this.toastrService.error(err);

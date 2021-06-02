@@ -58,6 +58,7 @@ export class ActorTabComponent implements OnInit {
       (res: any) => {
         this.toastrService.success(res, "Successful deletion of actor!");
         this.formattedActors = this.formattedActors.filter((a) => a.id !== id);
+        this.actor = new Actor();
       },
       (err) => {
         this.toastrService.error(err);

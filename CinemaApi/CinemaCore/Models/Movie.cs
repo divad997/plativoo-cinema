@@ -11,7 +11,7 @@ namespace CinemaCore.Models
         public Guid GenreId { get; set; }
         public Genre Genre { get; set; } = new Genre();
         public Guid DirectorId { get; set; }
-        public Director Director { get; set; } = new Director(); 
+        public Director Director { get; set; } = new Director();
         public List<Actor> Actors { get; set; } = new List<Actor>();
 
         public Movie(string name, DateTime releaseDate)
@@ -25,25 +25,11 @@ namespace CinemaCore.Models
             Name = movie.Name;
             ReleaseDate = movie.ReleaseDate;
             GenreId = movie.GenreId;
-            Genre = movie.Genre;
             DirectorId = movie.DirectorId;
-            Director = movie.Director;
-            Actors = movie.Actors;
         }
 
         public Movie()
         { 
-        }
-
-        public void Update(Movie movie)
-        {
-            Name = movie.Name;
-            ReleaseDate = movie.ReleaseDate;
-            Genre = movie.Genre;
-            GenreId = movie.GenreId;
-            Director = movie.Director;
-            DirectorId = movie.DirectorId;
-            Actors = movie.Actors;
         }
     }
 }

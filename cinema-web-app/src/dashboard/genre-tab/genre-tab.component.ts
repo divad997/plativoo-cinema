@@ -109,6 +109,7 @@ export class GenreTabComponent implements OnInit {
           this.formattedGenres = this.formattedGenres.concat(
             this.formatGenre(res)
           );
+          this.genre = new Genre();
         },
         (err) => {
           this.toastrService.error(err);

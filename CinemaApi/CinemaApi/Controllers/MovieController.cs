@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using CinemaApi.Interfaces;
 using CinemaCore.Models;
+using CinemaApi.Dtos;
 
 namespace movieApi.Controllers
 {
@@ -18,14 +19,14 @@ namespace movieApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateMovie([FromBody] Movie movie)
+        public async Task<IActionResult> CreateMovie([FromBody] MovieDto movieDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var newMovie = await _movieService.CreateMovieAsync(movie);
+            var newMovie = await _movieService.CreateMovieAsync(movieDto);
 
             return CreatedAtAction("GetMovieById", new { id = newMovie.Id }, newMovie);
         }
@@ -67,9 +68,9 @@ namespace movieApi.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> EditMovie([FromBody] Movie movie)
+        public async Task<IActionResult> EditMovie([FromBody] MovieDto movieDto)
         {
-            if (await _movieService.EditMovieAsync(movie) == false)
+            if (await _movieService.EditMovieAsync(movieDto) == false)
             {
                 return NotFound();
             }
