@@ -1,1 +1,1 @@
-# plativoo-cinema
+cinema-web-app
